@@ -3,8 +3,9 @@
 https://adventofcode.com/2020
 
 
-Day | * *
+Day | Stars
 ----|----
-  1 | * *
+  1 | &#x2B50; &#x2B50;
   2 |
   3 | 
+  
