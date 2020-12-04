@@ -2,8 +2,6 @@ import os
 
 class Slide:
 
-    map = []
-
     def readData(self):
         file = open(os.path.join(os.path.dirname(__file__), 'map.txt'), 'r')
         map = file.readlines()
@@ -22,8 +20,10 @@ class Slide:
         x_pos = 0
         mapMultipler = 1
 
-        for i in range(1, len(map)):
-
+        for i in range(0, len(map), y):
+            if i == 0:
+                continue
+                
             x_pos = x_pos + x
 
             if len(map[i] * mapMultipler) <= x_pos:
@@ -57,9 +57,32 @@ class Slide:
 def main():
 
     app = Slide()
+
     map = app.readData()
-    trees = app.countTrees(map, 3, 1)
-    print("There is", trees, "trees on the way!")
+    slope_1_trees = app.countTrees(map, 1, 1)
+
+    map = app.readData()
+    slope_2_trees = app.countTrees(map, 3, 1)
+
+    map = app.readData()
+    slope_3_trees = app.countTrees(map, 5, 1)
+
+    map = app.readData()
+    slope_4_trees = app.countTrees(map, 7, 1)
+
+    map = app.readData()
+    slope_5_trees = app.countTrees(map, 1, 2)
+
+    print("There is", slope_1_trees, "trees on the way of 1st slope!")
+    print("There is", slope_2_trees, "trees on the way of 2nd slope!")
+    print("There is", slope_3_trees, "trees on the way of 3rd slope!")
+    print("There is", slope_4_trees, "trees on the way of 4th slope!")
+    print("There is", slope_5_trees, "trees on the way of 5th slope!")
+    print("In total there is", slope_1_trees + slope_2_trees +
+    slope_3_trees + slope_4_trees + slope_5_trees, "trees on the way of slopes!")
+    print("And the multiplication of these is", slope_1_trees, "*", slope_2_trees, "*",
+            slope_3_trees, "*", slope_4_trees, "*", slope_5_trees, "=",
+            (slope_1_trees * slope_2_trees * slope_3_trees * slope_4_trees * slope_5_trees))
 
 if __name__ == "__main__":
     main()
