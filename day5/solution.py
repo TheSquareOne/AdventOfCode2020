@@ -87,6 +87,30 @@ class MySeat:
         return maxSeatID
 
 
+    def findMySeat(self, seatMap):
+
+        mySeatID = 0
+        seatIDList = []
+
+        # Make list of all occupied seat IDs
+        for row in range(len(seatMap)):
+            for col in range(len(seatMap[row])):
+                if seatMap[row][col] == 'X':
+                    seatIDList.append(self.getSeatID(row, col))
+
+        # Check which seat is not accupied and is middle of two occupied seats
+        for row in range(len(seatMap)):
+            for col in range(len(seatMap[row])):
+                
+                if seatMap[row][col] == 'O' and \
+                    self.getSeatID(row, col - 1) in seatIDList and \
+                    self.getSeatID(row, col + 1) in seatIDList:
+
+                    return self.getSeatID(row, col)
+
+        return 'No seat found'
+
+
 def main():
 
     app = MySeat()
@@ -95,7 +119,8 @@ def main():
     seatMap = app.createSeatMap(allPasses)
     app.printSeatMap(seatMap)
 
-    print("Highest SeatID occupied currently is:", app.getHighestSeatID(seatMap))
+    print("Highest seat ID occupied currently is:", app.getHighestSeatID(seatMap))
+    print("My seat ID is: ", app.findMySeat(seatMap))
 
 
 if __name__ == '__main__':
